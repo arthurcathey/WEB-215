@@ -1,0 +1,525 @@
+JavaScript Functions Cheat Sheet
+Term	Definition + Example	Common Issues / Mistakes	Good Questions for Professor
+Functions Intro	A function is a reusable block of code. Example:
+js function greet() { console.log("Hi"); } greet();	Forgetting to call the function (greet vs greet()), or mixing up return vs console.log.	“When should I use return instead of console.log?”
+Built-in Functions	Predefined by JavaScript, e.g.
+parseInt("5.99") → 5
+Math.round(4.7) → 5	Forgetting what each function returns (e.g., parseInt("5.99") truncates, not rounds).	“Is there a list of the most important built-in functions I should memorize?”
+Custom Functions	Functions you create yourself.
+js function add(a, b) { return a + b; }	Not returning values, only printing; accidentally reusing names of built-in functions.	“What are some naming best practices for functions?”
+Parameters vs Arguments	Parameters = placeholders in the definition. Arguments = values passed in.
+js function greet(name) {...} greet("Arthur");	Confusing the two; forgetting to pass enough arguments; passing wrong types (string vs number).	“What happens if I pass too few arguments to a function?”
+Passing Data Between Functions	Functions can call each other & return data.
+js function square(n){ return n*n; } function doubleSquare(x){ return square(x)*2; }	Forgetting to return, which makes functions output undefined.	“How do I trace values moving between functions when debugging?”
+Named Functions	A function with a name.
+function sayHi(){}	None — but scope issues can appear.	“Do named functions get hoisted?”
+Anonymous Functions	Function without a name, often inline.
+setTimeout(function(){...},1000);	Hard to debug (error stack shows “anonymous”).	“When should I use anonymous functions vs named ones?”
+Function Expressions	Functions stored in variables.
+const greet = function(name){...};	Forgetting ; after the function expression; confusion about hoisting (expressions are not hoisted).	“Why aren’t function expressions hoisted like normal functions?”
+Arrow Functions	Short syntax:
+const add = (a,b)=>a+b;	Forgetting parentheses for one parameter: (x)=>... vs x=>...; confusion about this (arrow functions don’t bind their own this).	“When should I avoid arrow functions, like in object methods?”
+IIFE (Immediately Invoked Function Expression)	Function that runs immediately.
+js (function(){ console.log("Run!"); })();	Forgetting the wrapping parentheses; trying to reuse it (can’t, since it’s self-executing).	“Why were IIFEs used a lot before ES6 modules?”
+Methods	A function stored inside an object.
+const dog={bark(){console.log("Woof");}};	Confusing methods with normal functions; forgetting to use this to access object data.	“What’s the difference between a function and a method?”
+Callback Functions	A function passed into another function.
+js [1,2,3].map(x=>x*2);	Confusion about execution order (async code); accidentally calling the function instead of passing it (callback() vs callback).	“How do callbacks differ from promises and async/await?”
+DocBlock	Special comment format documenting functions.
+js /** * Adds two nums * @param {num} a * @return {num} */	Not keeping docs updated; writing vague comments.	“Do tools like JSDoc automatically generate docs from DocBlocks?”
+🟢 Key Beginner Struggles (big picture)
+
+Return vs console.log → Beginners often confuse returning a value with printing it.
+
+Scope → Understanding where variables and functions “live.”
+
+Hoisting → Why some functions are usable before definition, others not.
+
+Callbacks → Understanding async flow vs sync flow.
+
+Arrow Functions → Misusing this in arrow functions inside objects.
+
+🧑‍🏫 Questions You Could Ask a Professor
+
+When should I use functions vs methods?
+
+Why do function expressions and arrow functions behave differently with this?
+
+Can you explain real-world examples where callbacks are better than normal function calls?
+
+How do private functions (hidden in closures or modules) compare to public ones?
+
+Why is it important to document functions with DocBlocks — isn’t the code itself enough?
+
+Are arrow functions always better, or should I stick with normal functions sometimes?
+
+What’s the difference between anonymous functions and IIFEs in terms of usage?
+
+Do you have a DocBlock extension that you would put forward to use?
+
+🔹 Function Logic (Business Logic)
+
+What it is:
+The rules and operations that make your app work.
+It handles what needs to be done with data.
+
+Where it lives:
+Usually in the backend or inside functions/methods in your code.
+
+Example:
+In a portfolio contact form:
+
+Validate that the email field isn’t empty.
+
+Check that the email looks valid (@ present).
+
+Save the message to a database or send it via email.
+
+👉 Function logic doesn’t care how it looks on screen, it only cares about the rules and results.
+
+🔹 Presentation Logic (UI Logic)
+
+What it is:
+The rules for displaying content to the user.
+It handles how things look and behave on the screen.
+
+Where it lives:
+In the frontend/UI (HTML, CSS, JavaScript, React components, etc.).
+
+Example:
+In that same portfolio contact form:
+
+Show red text under the field if the email is missing.
+
+Disable the submit button until all fields are valid.
+
+Show a success modal when the form is submitted.
+
+👉 Presentation logic doesn’t care what the backend rules are, it only cares about user feedback and layout.
+
+🔹 Quick Analogy
+
+Function Logic = The kitchen in a restaurant (cooks prepare food by rules).
+
+Presentation Logic = The waiter and table setup (how food is presented to customers).
+
+🔎 First — What is the DOM?
+
+DOM = Document Object Model.
+
+When a browser loads a web page, it creates a tree-like structure of all the HTML elements.
+Example:
+
+<html>
+  <body>
+    <h1>Hello</h1>
+    <p>Welcome!</p>
+  </body>
+</html>
+
+
+Becomes a tree like:
+
+document
+ └── html
+     └── body
+         ├── h1 ("Hello")
+         └── p ("Welcome!")
+
+
+JavaScript can reach into this tree and change things.
+
+🛠 Ways to Manipulate the DOM
+
+Change Content
+
+document.querySelector("h1").textContent = "Goodbye!";
+
+
+→ Changes <h1>Hello</h1> into <h1>Goodbye!</h1>.
+
+Change Styles
+
+document.querySelector("p").style.color = "red";
+
+
+→ Makes the paragraph text red.
+
+Change Attributes
+
+document.querySelector("img").setAttribute("src", "newpic.jpg");
+
+
+Add / Remove Elements
+
+let newDiv = document.createElement("div");
+newDiv.textContent = "I'm new!";
+document.body.appendChild(newDiv);
+
+
+React to Events
+
+document.querySelector("button")
+  .addEventListener("click", () => alert("You clicked me!"));
+
+✅ Why it Matters
+
+DOM manipulation makes websites interactive and dynamic instead of just static HTML.
+Examples:
+
+Expanding a dropdown menu
+
+Showing error messages
+
+Adding items to a shopping cart
+
+Live updates (like chat apps)
+
+👉 So in short: DOM manipulation = using JavaScript to make a web page respond, update, and change without reloading.
+
+🔹 About Function Logic vs Presentation Logic
+
+In web development, how do you clearly separate function logic from presentation logic in a project?
+
+Can function logic and presentation logic exist in the same file, or is it better to keep them separate?
+
+How does separating logic improve maintainability and debugging in real-world projects?
+
+In my portfolio project, would the resume download button be considered function logic, presentation logic, or both?
+
+Is input validation (like checking email format in a form) considered function logic or presentation logic?
+
+🔹 About the DOM (Document Object Model)
+
+How does the DOM act as the connection between function logic and presentation logic?
+
+When I use document.querySelector() in JavaScript, am I directly manipulating the presentation logic, or is that considered part of function logic?
+
+What are some best practices for updating the DOM without causing performance issues (like reflows and repaints)?
+
+Could you explain how event listeners tie into DOM manipulation and how they affect function vs. presentation logic?
+
+When building interactive features (like a modal on first visit), should I think of the DOM as part of the UI layer or as the bridge between logic and UI?
+
+🔹 Going Deeper
+
+How do modern frameworks like React or Vue change the way we think about DOM manipulation compared to vanilla JavaScript?
+
+What mistakes do students often make when mixing function logic and DOM manipulation?
+
+Can you give an example of when too much logic is in the DOM/UI instead of being handled by function logic?
+
+In professional projects, who typically focuses on function logic vs presentation logic — backend devs, frontend devs, or both?
+
+For portfolio projects, what’s the best way to show that I understand the DOM and logic separation to recruiters who might look at my code?
+
+🔹 Function Logic vs Presentation Logic
+
+1. In web development, how do you clearly separate function logic from presentation logic in a project?
+
+Answer: Function logic is the “what” — the calculations, conditions, and data handling. Presentation logic is the “how it looks” — the HTML and CSS that display content. Separation usually means putting calculations and decisions in JavaScript functions, while keeping structure/styling in HTML/CSS.
+
+2. Can function logic and presentation logic exist in the same file, or is it better to keep them separate?
+
+Answer: They can exist together (like inline scripts/styles in HTML), but it’s better to keep them separate for maintainability. Modern practice is separation: HTML for structure, CSS for styling, and JS for function logic.
+
+3. How does separating logic improve maintainability and debugging in real-world projects?
+
+Answer: When logic is separated, you can fix a bug in calculations (function logic) without breaking the layout. Or, redesign the UI (presentation) without rewriting the logic. This reduces errors and makes collaboration easier.
+
+4. In my portfolio project, would the resume download button be considered function logic, presentation logic, or both?
+
+Answer: Both. The button itself is presentation logic (HTML/CSS). The code that triggers the download is function logic (JavaScript or server-side).
+
+5. Is input validation (like checking email format in a form) considered function logic or presentation logic?
+
+Answer: It’s function logic, because it checks and processes data. The error messages shown to the user, however, fall under presentation logic.
+
+🔹 The DOM (Document Object Model)
+
+6. How does the DOM act as the connection between function logic and presentation logic?
+
+Answer: The DOM is the bridge. Your HTML is turned into a DOM tree. Function logic (JavaScript) can grab and modify DOM elements, which then change the way the page is presented.
+
+7. When I use document.querySelector() in JavaScript, am I directly manipulating the presentation logic, or is that considered part of function logic?
+
+Answer: querySelector() itself is function logic (finding an element). But when you change .style or .textContent, you’re modifying the presentation logic.
+
+8. What are some best practices for updating the DOM without causing performance issues (like reflows and repaints)?
+
+Answer:
+
+Minimize DOM updates (batch changes instead of many small ones).
+
+Use classList to toggle styles instead of changing many inline styles.
+
+Use document fragments or virtual DOM approaches (React, Vue).
+
+9. Could you explain how event listeners tie into DOM manipulation and how they affect function vs. presentation logic?
+
+Answer: Event listeners (like button.addEventListener('click', fn)) are function logic, but they respond to user interaction by often changing presentation logic (showing modals, updating text). They’re the “glue” between the two.
+
+10. When building interactive features (like a modal on first visit), should I think of the DOM as part of the UI layer or as the bridge between logic and UI?
+
+Answer: Think of the DOM as the bridge. Your function logic (JS) says “show modal if first visit.” The DOM is how that instruction becomes visible (presentation logic).
+
+🔹 Going Deeper
+
+11. How do modern frameworks like React or Vue change the way we think about DOM manipulation compared to vanilla JavaScript?
+
+Answer: Instead of manually updating the DOM, frameworks use a virtual DOM or reactive system. You just describe the UI state, and the framework updates the DOM efficiently behind the scenes.
+
+12. What mistakes do students often make when mixing function logic and DOM manipulation?
+
+Answer:
+
+Writing lots of inline onclick attributes in HTML.
+
+Mixing long JS logic directly into HTML files.
+
+Updating DOM one piece at a time instead of in batches.
+
+13. Can you give an example of when too much logic is in the DOM/UI instead of being handled by function logic?
+
+Answer: Example: Using long inline style="..." or embedding validation rules directly in HTML attributes instead of writing reusable JS functions. This makes updates harder.
+
+14. In professional projects, who typically focuses on function logic vs presentation logic — backend devs, frontend devs, or both?
+
+Answer: Frontend developers usually handle both, but presentation logic leans more toward UI/UX designers + frontend devs, while function logic may overlap with backend devs (APIs, business rules).
+
+15. For portfolio projects, what’s the best way to show that I understand the DOM and logic separation to recruiters who might look at my code?
+
+Answer:
+
+Use clean file separation (index.html, styles.css, script.js).
+
+Avoid inline styles and scripts.
+
+Comment your JS functions to explain when logic vs presentation is happening.
+
+Show one feature (like your resume modal) with both DOM access and clean logic separation.
+🔹 1. Separation of Concerns (SoC)
+
+What it is: The principle of dividing code into distinct sections, each responsible for one thing.
+
+Why it matters: Keeps your code clean, easier to debug, and scalable.
+
+Portfolio tie-in:
+
+HTML = structure
+
+CSS = presentation
+
+JS = behavior (function logic)
+
+🔹 2. Progressive Enhancement vs Graceful Degradation
+
+Progressive Enhancement: Start with a basic, accessible site (HTML), then layer on CSS (style) and JS (interactivity).
+
+Graceful Degradation: Build the full-featured site first, but make sure it still works without certain features.
+
+Portfolio tie-in: If JavaScript fails, your resume and projects should still be accessible in plain HTML.
+
+🔹 3. Accessibility (a11y)
+
+What it is: Ensuring your site is usable by people with disabilities (screen readers, keyboard nav).
+
+Examples:
+
+Semantic HTML (<nav>, <header>, <footer>).
+
+alt text on images.
+
+Proper color contrast.
+
+Portfolio tie-in: Recruiters will notice if your site is accessible — it’s often a job requirement.
+
+🔹 4. State Management
+
+What it is: Keeping track of information while the user interacts with your site.
+
+Example: Modal showing only on first visit → you could use localStorage to save state.
+
+Portfolio tie-in: Shows you know how to handle real-world interactivity, not just static pages.
+
+🔹 5. Event-Driven Programming
+
+Concept: The browser waits for events (clicks, scrolls, form submits) and then runs your function logic.
+
+Why it’s important: Most web UIs are built around events.
+
+Portfolio tie-in: Your resume download, form validation, and modal all depend on events.
+
+🔹 6. Data Binding
+
+Definition: Connecting data (function logic) to UI (presentation logic).
+
+Example in Vanilla JS: Updating textContent when a calculation finishes.
+
+Example in React: Using { } curly braces to bind data in JSX.
+
+Portfolio tie-in: Your projects can show both styles (plain JS vs framework).
+
+🔹 7. API Integration
+
+Why relevant: Modern portfolios often show off API work (GitHub repos, weather apps, etc.).
+
+Connection to logic: API fetch = function logic. Displaying results = presentation logic.
+
+Portfolio tie-in: If you integrate GitHub’s API, recruiters can see your repos live.
+
+🔹 8. Performance & Optimization
+
+Key areas:
+
+Minimize DOM manipulation.
+
+Optimize images.
+
+Lazy load heavy assets.
+
+Portfolio tie-in: A fast-loading portfolio makes a huge impression on recruiters.
+
+🔹 9. MVC (Model–View–Controller)
+
+What it is: A pattern for structuring applications.
+
+Model = data (resume info, project list).
+
+View = presentation logic (HTML/CSS).
+
+Controller = function logic (JS).
+
+Portfolio tie-in: Even if you’re not building full MVC apps yet, being able to explain how your site follows the spirit of MVC shows maturity.
+
+🔹 10. Usability & UX Principles
+
+Don’t make me think: Users should immediately know where to click.
+
+Consistency: Navigation should look/behave the same on every page.
+
+Feedback: Buttons/forms should show success/failure messages.
+
+Portfolio tie-in: These principles explain why you’re repeating About, Resume, and Contact both on the Home page and in dedicated sections — it’s about usability, clarity, and recruiter expectations.
+
+👉 In short:
+
+DOM = bridge between logic and presentation.
+
+SoC, MVC, and event-driven programming = ways to keep things structured.
+
+Accessibility, usability, performance = what recruiters actually notice.
+
+State management and APIs = bonus points that prove you can handle “real” web apps.
+
+📘 Web Development Glossary – Arthur Cathey Portfolio
+1. DOM (Document Object Model)
+
+Definition: A tree-like structure the browser creates from your HTML, CSS, and JS.
+
+Why it matters: JavaScript can manipulate the DOM to update what users see (add/remove elements, change styles, update text).
+
+Example: document.getElementById("contactForm").reset();
+
+2. Function Logic
+
+Definition: The JavaScript code that processes data, performs calculations, or handles interactions.
+
+Example: A function that calculates project costs or validates a form.
+
+Portfolio tie-in: Resume download buttons, modal open/close, and form validation.
+
+3. Presentation Logic
+
+Definition: The part of your code that determines how information is displayed to users (HTML + CSS + JS-driven updates).
+
+Example: Updating a <div> with new text when a user submits a form.
+
+Portfolio tie-in: Responsive layouts (Tailwind), project cards, and modal animations.
+
+4. Separation of Concerns (SoC)
+
+Definition: A design principle where code is divided into sections by responsibility.
+
+Example: HTML = structure, CSS = design, JS = behavior.
+
+Portfolio tie-in: Keeps your code clean and professional, easy for recruiters to review.
+
+5. MVC (Model–View–Controller)
+
+Definition: An application design pattern.
+
+Model = Data (your resume, project info).
+
+View = What users see (web pages).
+
+Controller = Handles user input and connects model to view.
+
+Portfolio tie-in: Even if not fully implemented, your portfolio reflects MVC-like separation.
+
+6. Event-Driven Programming
+
+Definition: Code that responds to events like clicks, scrolls, or form submissions.
+
+Example:
+
+button.addEventListener("click", showModal);
+
+
+Portfolio tie-in: Modal welcome message (shows only once), mobile menu toggle, resume download button.
+
+7. State Management
+
+Definition: Keeping track of user interactions and system status across a session.
+
+Example: Using localStorage so the welcome modal only shows once.
+
+Portfolio tie-in: Enhances UX by remembering visitor preferences.
+
+8. Progressive Enhancement vs Graceful Degradation
+
+Progressive Enhancement: Build a simple, accessible site first, then add features.
+
+Graceful Degradation: Build the full-featured site but ensure it still works without advanced features.
+
+Portfolio tie-in: Recruiters can still view your resume even if JavaScript fails.
+
+9. Accessibility (a11y)
+
+Definition: Designing for all users, including those with disabilities.
+
+Best Practices:
+
+Semantic HTML (<nav>, <header>, <footer>).
+
+alt text on images.
+
+High-contrast colors.
+
+Portfolio tie-in: Screen readers can still navigate your site; recruiters notice accessibility compliance.
+
+10. Usability & UX Principles
+
+Don’t make me think: Navigation should be obvious.
+
+Consistency: Same menu across all pages.
+
+Feedback: Buttons/forms should provide visible results (success/failure).
+
+Portfolio tie-in: Explains why “About,” “Resume,” and “Contact” exist both on Home and as dedicated pages.
+
+11. API Integration (Advanced)
+
+Definition: Connecting your site to external services or databases.
+
+Example: Fetching GitHub repo data automatically.
+
+Portfolio tie-in: Could display live project info instead of hardcoding it.
+
+12. Performance & Optimization
+
+Definition: Making sites fast and efficient.
+
+Key Practices: Optimize images, minimize DOM updates, lazy load content.
+
+Portfolio tie-in: Recruiters expect a fast-loading portfolio.

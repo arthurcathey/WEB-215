@@ -1,0 +1,113 @@
+Types of functions:
+built-in 
+custom (named)
+
+Parameters vs arguments
+
+passing data between function
+
+ways to define a function:
+anonymous 
+function expression
+arrow function
+IIFE
+method
+callback
+
+document a function with DocBlock
+
+Core JavaScript Terms
+
+Variable – A container for storing data (e.g., let name = "Arthur";).
+
+Constant – A variable that cannot change once assigned (const pi = 3.14;).
+
+Data Types – The kind of data stored, like:
+
+string → text ("hello")
+
+number → numbers (42, 3.14)
+
+boolean → true/false
+
+null → empty on purpose
+
+undefined → not yet assigned
+
+object → collections of key/value pairs
+
+array → list of items ([1, 2, 3])
+
+🔹 Operators
+
+Arithmetic operators → +, -, *, /, % (modulus/remainder).
+
+Assignment operator → =, +=, -=, etc.
+
+Comparison operators → ==, === (strict equal), !=, <, >.
+
+Logical operators → && (and), || (or), ! (not).
+
+🔹 Control Flow
+
+If statement – Runs code only if condition is true.
+
+Else / else if – Runs code if the first condition fails.
+
+Switch – Alternative to multiple if statements.
+
+Loops – Repeat code:
+
+for loop (fixed number of times)
+
+while loop (while condition is true)
+
+for…of loop (goes through arrays)
+
+🔹 Functions
+
+Function – Reusable block of code. Example:
+
+function greet(name) {
+  return "Hello, " + name;
+}
+
+
+Parameters – Inputs to a function.
+
+Return – Output from a function.
+
+Arrow functions – Shortcut syntax:
+
+const add = (a, b) => a + b;
+
+🔹 Objects & Arrays
+
+Object – Stores data as key/value pairs.
+
+let person = { name: "Arthur", age: 25 };
+
+
+Array – Stores ordered lists of items.
+
+let colors = ["red", "green", "blue"];
+
+🔹 DOM (Document Object Model)
+
+document – Represents the HTML page.
+
+Element – A single item in the DOM (like <p> or <div>).
+
+querySelector() – Selects an element.
+
+addEventListener() – Lets you respond to clicks, keypresses, etc.
+
+🔹 General Concepts
+
+Syntax – The rules of writing code.
+
+Debugging – Finding and fixing errors.
+
+Console – A tool in the browser to see messages/errors (console.log).
+
+Scope – Where variables are accessible (global vs local).
