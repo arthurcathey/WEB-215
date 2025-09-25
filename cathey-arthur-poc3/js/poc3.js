@@ -30,7 +30,6 @@ Feel free to use the variable created in the previous task.
 */
 pageHeading.insertAdjacentText("beforeend", ": Arthur Cathey");
 
-
 /*
 Task 5
 Use a METHOD to create a new H2 element, stored in a variable named: h2
@@ -50,7 +49,7 @@ Store this list in a variable named: headingClasses
 log the variable to the console
 */
 let headingClasses = pageHeading.classList;
-console.log(headingClasses);
+console.log(headingClasses); // should show: darkBg upper
 
 /*
 Task 7
@@ -128,6 +127,7 @@ Task 14
 Remove the footer from the page
 */
 document.querySelector("footer").remove();
+
 /*
 Task 15
 Select the only H6 on the page and store it in a variable named: h6
