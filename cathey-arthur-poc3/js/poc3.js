@@ -49,7 +49,7 @@ Store this list in a variable named: headingClasses
 log the variable to the console
 */
 let headingClasses = pageHeading.classList;
-console.log(headingClasses); // should show: darkBg upper
+console.log(headingClasses); 
 
 /*
 Task 7

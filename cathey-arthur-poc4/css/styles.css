@@ -1,0 +1,76 @@
+h1 {
+  border-bottom: 1px solid #333;
+  height: 85px;
+  margin: 0 0 2rem;
+}
+
+form {
+  border-bottom: 1px solid #333;
+  margin-bottom: 1rem;
+  padding-bottom: 2rem;
+}
+
+#size-text {
+  background-color: #0061cf;
+  border-radius: 10px;
+  color: #fff;
+  padding: 0.25rem;
+  position: relative;
+}
+
+[type='text'] {
+  margin-bottom: 1rem;
+}
+
+[type='submit'],
+button {
+  margin-top: 1rem;
+}
+
+button {
+  cursor: pointer;
+  height: 150px;
+  margin-right: 3rem;
+  width: 100px;
+}
+
+button:hover {
+  background-color: #c29bc2;
+}
+
+#modalOuterBox {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+#modalContent {
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #000;
+  border-top: 10px solid #333;
+  margin: 2rem auto auto;
+  padding: 1rem;
+  position: relative;
+  width: 80%;
+}
+
+#close {
+  font-size: 2rem;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  transition: all 0.25s;
+}
+
+#close:hover {
+  color: #f00;
+  cursor: pointer;
+  transform: rotate(90deg);
+}
